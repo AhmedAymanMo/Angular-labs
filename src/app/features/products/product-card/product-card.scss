@@ -1,0 +1,23 @@
+.product-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+
+  &__title {
+    margin-bottom: 0.5rem;
+  }
+
+  &__price {
+    font-weight: bold;
+  }
+
+  &__discount {
+    color: red;
+  }
+
+  &__button {
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+}

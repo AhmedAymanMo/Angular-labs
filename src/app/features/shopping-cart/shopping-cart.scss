@@ -1,0 +1,16 @@
+.shopping-cart {
+  padding: 1rem;
+
+  &__item {
+    margin-bottom: 1rem;
+  }
+
+  input {
+    width: 60px;
+    margin-left: 0.5rem;
+  }
+
+  button {
+    margin-top: 0.5rem;
+  }
+}

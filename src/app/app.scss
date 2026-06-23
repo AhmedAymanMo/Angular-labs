@@ -1,0 +1,35 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+}
+
+.app-content {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.app-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+
+  @media (min-width: 992px) {
+    grid-template-columns: 7fr 4fr; /* Responsive side-by-side grid */
+  }
+
+  &__products {
+    min-width: 0; // Prevent flex/grid item overflow
+  }
+
+  &__cart {
+    position: sticky;
+    top: 2rem;
+    min-width: 0;
+  }
+}

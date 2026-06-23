@@ -1,0 +1,38 @@
+<div class="product-card">
+
+  <h3 class="product-card__title">
+    {{ product.name }}
+  </h3>
+
+  <p class="product-card__description">
+    {{ product.description }}
+  </p>
+
+  <p class="product-card__price">
+    Price:
+    {{ product.price | currency }}
+  </p>
+
+  @if(product.discount > 0) {
+
+    <p class="product-card__discount">
+      Discount:
+      {{ product.discount }}%
+    </p>
+
+    <p class="product-card__final-price">
+      After Discount:
+      {{ getPriceAfterDiscount(product) | currency }}
+    </p>
+
+  }
+
+  <button
+      class="product-card__button"
+      (click)="onAdd()">
+
+      Add To Cart
+
+  </button>
+
+</div>
