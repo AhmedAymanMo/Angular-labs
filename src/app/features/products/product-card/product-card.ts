@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output, computed } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { Product } from '../../../models/product';
 
@@ -10,15 +10,17 @@ import { Product } from '../../../models/product';
   styleUrl: './product-card.scss',
 })
 export class ProductCard {
-  @Input({ required: true }) product!: Product;
+  product = input.required<Product>();
 
-  @Output() addToCart = new EventEmitter<Product>();
+  addToCart = output<Product>();
 
-  getPriceAfterDiscount(product: Product): number {
-    return product.price - (product.price * (product.discount / 100));
-  }
+  priceAfterDiscount = computed(() => {
+    const p = this.product();
+    const discount = p.discount || 0;
+    return p.price - (p.price * (discount / 100));
+  });
 
   onAdd() {
-    this.addToCart.emit(this.product);
+    this.addToCart.emit(this.product());
   }
 }

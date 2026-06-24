@@ -1,7 +1,7 @@
 <div class="product-list-container">
   <h2 class="product-list-title">products</h2>
   <div class="product-grid">
-    @for (product of products; track product.id) {
+    @for (product of products(); track product.id) {
       <div class="product-grid__item">
         <app-product-card 
           [product]="product" 

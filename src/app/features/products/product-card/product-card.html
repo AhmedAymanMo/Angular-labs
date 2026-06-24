@@ -1,28 +1,28 @@
 <div class="product-card">
 
   <h3 class="product-card__title">
-    {{ product.name }}
+    {{ product().name }}
   </h3>
 
   <p class="product-card__description">
-    {{ product.description }}
+    {{ product().description }}
   </p>
 
   <p class="product-card__price">
     Price:
-    {{ product.price | currency }}
+    {{ product().price | currency }}
   </p>
 
-  @if(product.discount > 0) {
+  @if(product().discount > 0) {
 
     <p class="product-card__discount">
       Discount:
-      {{ product.discount }}%
+      {{ product().discount }}%
     </p>
 
     <p class="product-card__final-price">
       After Discount:
-      {{ getPriceAfterDiscount(product) | currency }}
+      {{ priceAfterDiscount() | currency }}
     </p>
 
   }

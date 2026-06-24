@@ -9,7 +9,7 @@
       </div>
       <div class="app-layout__cart">
         <app-shopping-cart 
-          [cartItems]="cartItems" 
+          [cartItems]="cartItems()" 
           (updateQuantity)="onUpdateQuantity($event)"
           (removeItem)="onRemoveItem($event)">
         </app-shopping-cart>

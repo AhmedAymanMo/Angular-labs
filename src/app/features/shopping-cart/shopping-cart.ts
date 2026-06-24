@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CurrencyPipe } from '@angular/common';
 import { CartItem } from '../../models/cart-item';
@@ -12,13 +12,14 @@ import { Product } from '../../models/product';
   styleUrl: './shopping-cart.scss'
 })
 export class ShoppingCart {
-  @Input() cartItems: CartItem[] = [];
+  cartItems = input<CartItem[]>([]);
 
-  @Output() updateQuantity = new EventEmitter<{ productId: number, quantity: number }>();
-  @Output() removeItem = new EventEmitter<number>();
+  updateQuantity = output<{ productId: number, quantity: number }>();
+  removeItem = output<number>();
 
   getPriceAfterDiscount(product: Product): number {
-    return product.price - (product.price * (product.discount / 100));
+    const discount = product.discount || 0;
+    return product.price - (product.price * (discount / 100));
   }
 
   decreaseQuantity(item: CartItem) {
@@ -35,18 +36,18 @@ export class ShoppingCart {
     this.removeItem.emit(productId);
   }
 
-  getTotalPriceBeforeDiscount(): number {
-    return this.cartItems.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
-  }
+  totalPriceBeforeDiscount = computed(() => {
+    return this.cartItems().reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+  });
 
-  getTotalPriceAfterDiscount(): number {
-    return this.cartItems.reduce((sum, item) => {
+  totalPriceAfterDiscount = computed(() => {
+    return this.cartItems().reduce((sum, item) => {
       const discounted = this.getPriceAfterDiscount(item.product);
       return sum + (discounted * item.quantity);
     }, 0);
-  }
+  });
 
-  getTotalDiscount(): number {
-    return this.getTotalPriceBeforeDiscount() - this.getTotalPriceAfterDiscount();
-  }
+  totalDiscount = computed(() => {
+    return this.totalPriceBeforeDiscount() - this.totalPriceAfterDiscount();
+  });
 }
