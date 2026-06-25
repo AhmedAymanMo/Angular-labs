@@ -3,19 +3,17 @@
   <app-lower-header class="app__lower-header"></app-lower-header>
 
   <main class="app-content">
-    <div class="app-layout">
-      <div class="app-layout__products">
-        <app-product-list (addToCart)="onAddToCart($event)"></app-product-list>
-      </div>
-      <div class="app-layout__cart">
-        <app-shopping-cart 
-          [cartItems]="cartItems()" 
-          (updateQuantity)="onUpdateQuantity($event)"
-          (removeItem)="onRemoveItem($event)">
-        </app-shopping-cart>
-      </div>
-    </div>
+    <router-outlet></router-outlet>
   </main>
 
   <app-my-footer class="app__footer"></app-my-footer>
+
+  @if (isLoading()) {
+    <div class="loading-overlay">
+      <div class="loading-spinner-wrapper">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Resolving details, please wait...</p>
+      </div>
+    </div>
+  }
 </div>
