@@ -27,12 +27,24 @@
 
   }
 
-  <button
-      class="product-card__button"
-      (click)="onAdd()">
-
-      Add To Cart
-
-  </button>
+  <div style="display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap;">
+    <button
+        class="product-card__button"
+        (click)="onAdd()">
+        Add To Cart
+    </button>
+  
+    <a class="product-card__button" 
+       [routerLink]="['/product', product().id, 'edit']"
+       style="background: #17a2b8; text-decoration: none; text-align: center;">
+       Edit
+    </a>
+  
+    <button class="product-card__button" 
+            style="background: #dc3545;" 
+            (click)="onDelete()">
+        Delete
+    </button>
+  </div>
 
 </div>

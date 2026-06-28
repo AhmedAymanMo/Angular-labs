@@ -1,11 +1,15 @@
 <div class="product-list-container">
-  <h2 class="product-list-title">products</h2>
+  <div style="display: flex; justify-content: space-between; align-items: center">
+    <h2 class="product-list-title">products</h2>
+    <a [routerLink]="['/product/add']" style="padding: 0.5rem 1rem; background: #28a745; color: white; border-radius: 8px; text-decoration: none;">Add New Product</a>
+  </div>
   <div class="product-grid">
     @for (product of products(); track product.id) {
       <div class="product-grid__item">
         <app-product-card 
           [product]="product" 
-          (addToCart)="addToCart.emit($event)">
+          (addToCart)="addToCart.emit($event)"
+          (deleteProduct)="onDelete($event)">
         </app-product-card>
       </div>
     }

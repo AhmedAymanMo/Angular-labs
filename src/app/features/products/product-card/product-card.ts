@@ -1,11 +1,12 @@
 import { Component, input, output, computed } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { Product } from '../../../models/product';
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, RouterLink],
   templateUrl: './product-card.html',
   styleUrl: './product-card.scss',
 })
@@ -13,6 +14,7 @@ export class ProductCard {
   product = input.required<Product>();
 
   addToCart = output<Product>();
+  deleteProduct = output<number>();
 
   priceAfterDiscount = computed(() => {
     const p = this.product();
@@ -22,5 +24,9 @@ export class ProductCard {
 
   onAdd() {
     this.addToCart.emit(this.product());
+  }
+
+  onDelete() {
+    this.deleteProduct.emit(this.product().id);
   }
 }

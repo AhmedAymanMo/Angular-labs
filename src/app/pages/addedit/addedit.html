@@ -1,0 +1,38 @@
+<div class="addedit-container">
+  <h2>{{ isEditMode ? 'Edit Product' : 'Add Product' }}</h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form">
+    
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" type="text" formControlName="name" />
+      @if (productForm.get('name')?.invalid && productForm.get('name')?.touched) {
+        <span class="error">Name is required.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input id="price" type="number" formControlName="price" />
+    </div>
+
+    <div class="form-group">
+      <label for="discount">Discount (%)</label>
+      <input id="discount" type="number" formControlName="discount" />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="imageUrl">Image URL</label>
+      <input id="imageUrl" type="text" formControlName="imageUrl" />
+    </div>
+
+    <button type="submit" [disabled]="productForm.invalid" class="submit-btn">
+      {{ isEditMode ? 'Update' : 'Add' }}
+    </button>
+  </form>
+</div>
